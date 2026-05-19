@@ -1,36 +1,46 @@
-# Quantum Mechanical Keyboard Firmware
+# adipoli
 
-[![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
-[![Discord](https://img.shields.io/discord/440868230475677696.svg)](https://discord.gg/qmk)
-[![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://docs.qmk.fm)
-[![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/pulse/monthly)
-[![GitHub forks](https://img.shields.io/github/forks/qmk/qmk_firmware.svg?style=social&label=Fork)](https://github.com/qmk/qmk_firmware/)
+Firmware for **adipoli**, a custom hard-wired split keyboard, built on [QMK](https://github.com/qmk/qmk_firmware).
 
-This is a keyboard firmware based on the [tmk\_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the Clueboard product line.
+Each half has its own Pro Micro (ATmega32u4) and is flashed separately with the `left` or `right` keymap. There is no serial/USB split link in firmware—the halves work as two independent keyboards wired to your machine.
+
+## Quick start
+
+Prerequisites: [QMK build environment](https://docs.qmk.fm/#/getting_started_build_tools).
+
+```bash
+# Left half
+qmk compile -kb adipoli -km left
+qmk flash -kb adipoli -km left
+
+# Right half
+qmk compile -kb adipoli -km right
+qmk flash -kb adipoli -km right
+```
+
+Or with `make`:
+
+```bash
+make adipoli:left:flash
+make adipoli:right:flash
+```
+
+Put each half in bootloader mode before flashing (see [Bootloader](keyboards/adipoli/readme.md#bootloader)).
+
+## Repository layout
+
+| Path                       | Purpose                                   |
+| -------------------------- | ----------------------------------------- |
+| `keyboards/adipoli/`       | Keyboard definition, matrix pins, keymaps |
+| `quantum/`, `tmk_core/`, … | QMK core (upstream)                       |
+
+This branch is a trimmed QMK fork: only the **adipoli** keyboard is kept under `keyboards/`. Upstream QMK lives at [qmk/qmk_firmware](https://github.com/qmk/qmk_firmware).
 
 ## Documentation
 
-* [See the official documentation on docs.qmk.fm](https://docs.qmk.fm)
+- **Keyboard details, layout, layers:** [keyboards/adipoli/readme.md](keyboards/adipoli/readme.md)
+- **QMK guides:** [docs.qmk.fm](https://docs.qmk.fm) — especially the [Complete Newbs Guide](https://docs.qmk.fm/#/newbs)
 
-The docs are powered by [VitePress](https://vitepress.dev/). They are also viewable offline; see [Previewing the Documentation](https://docs.qmk.fm/#/contributing?id=previewing-the-documentation) for more details.
+## License
 
-You can request changes by making a fork and opening a [pull request](https://github.com/qmk/qmk_firmware/pulls).
-
-## Supported Keyboards
-
-* [Planck](/keyboards/planck/)
-* [Preonic](/keyboards/preonic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
-* [Clueboard](/keyboards/clueboard/)
-* [Cluepad](/keyboards/clueboard/17/)
-* [Atreus](/keyboards/atreus/)
-
-The project also includes community support for [lots of other keyboards](/keyboards/).
-
-## Maintainers
-
-QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/jackhumbert), the Ergodox EZ by [ZSA Technology Labs](https://github.com/zsa), the Clueboard by [Zach White](https://github.com/skullydazed), and the Atreus by [Phil Hagelberg](https://github.com/technomancy).
-
-## Official Website
-
-[qmk.fm](https://qmk.fm) is the official website of QMK, where you can find links to this page, the documentation, and the keyboards supported by QMK.
+QMK firmware is [GPL-2.0-or-later](LICENSE). See upstream QMK for full license and contributor terms.
