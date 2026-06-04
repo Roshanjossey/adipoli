@@ -1,10 +1,10 @@
-# adipoli
+# adipoli ✋🏾⌨️ ⌨️🤚🏾
 
 <img src="docs/assets/adipoli-banner.svg" width="800" height="400">
 
 <p>
-  <img src="docs/assets/keyboard-left.svg">
-  <img src="docs/assets/keyboard-right.svg">
+  <img src="docs/assets/keyboard-left.svg" with="400px">
+  <img src="docs/assets/keyboard-right.svg" width="400px">
 </p>
 
 Firmware for **adipoli**, a custom hard-wired split keyboard, built on [QMK](https://github.com/qmk/qmk_firmware).
