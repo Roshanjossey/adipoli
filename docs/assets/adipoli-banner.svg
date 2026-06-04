@@ -1,0 +1,187 @@
+<svg fill="none" viewBox="0 0 600 400" width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        .body {
+          --color-main: #ff8A00;
+          --color-primary: #E63E8D;
+          --color-secondary: #5B3CC4;
+          --color-background: #0d1117;
+          --color-text: #f0f0f0;
+          --color-tertiary: #F6C445;
+          --color-quaternary: #E85D5D;
+
+          height: 400px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-image: radial-gradient(var(--color-tertiary), var(--color-main), var(--color-quaternary), var(--color-primary), var(--color-secondary));
+          animation: border 5s linear infinite;
+          background-size: 200% 200%;
+          background-position: 0 0;
+          border-color: var(--color-background);
+          border-radius: 2rem;
+        }
+
+        .container {
+          background: var(--color-background);
+          height: calc(100% - 1rem);
+          width: calc(100% - 1rem);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 1.8rem;
+        }
+
+        .split {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0;
+          /* animation: split-gap 10s ease-in-out infinite; */
+        }
+
+        .half {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .half-left {
+          color: var(--color-secondary);
+          align-items: flex-end;
+          animation: split-left 10s ease-in-out infinite;
+        }
+
+        .half-right {
+          color: var(--color-primary);
+          align-items: flex-start;
+          animation: split-right 10s ease-in-out infinite;
+        }
+
+        .row {
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          gap: 0.12em;
+        }
+
+        .glyph {
+          display: inline-block;
+          font-size: 4rem;
+          font-weight: 700;
+          line-height: 1;
+          animation: letter-press 10s ease-in-out infinite;
+          animation-delay: calc(0.9s + var(--i) * 0.40s);
+        }
+
+        .row.ml .glyph {
+          font-family: "Noto Sans Malayalam", "Malayalam Sangam MN", sans-serif;
+        }
+
+        .row.en .glyph {
+          font-family: "Open Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+          text-transform: lowercase;
+        }
+
+        @keyframes border {
+          0% { background-position: 0 0; }
+          20% { background-position: 100% 0; }
+          40% { background-position: 100% 100%; }
+          60% { background-position: 0 100%; }
+          100% { background-position: 0 0; }
+        }
+
+        @keyframes split-gap {
+          0%, 10%, 88%, 100% { gap: 0em; }
+          18%, 80% { gap: 4em; }
+        }
+
+        @keyframes split-left {
+          0%, 10%, 88%, 100% { transform: translateX(0); }
+          18%, 80% { transform: translateX(-2.35em) rotateZ(-4deg); }
+        }
+
+        @keyframes split-right {
+          0%, 10%, 88%, 100% { transform: translateX(0); }
+          18%, 80% { transform: translateX(2.35em) rotateZ(4deg); }
+        }
+
+        @keyframes letter-press {
+          0%, 3.5%, 7%, 100% {
+            transform: translateY(0);
+          }
+          5%, 5.5% {
+            transform: translateY(0.14em);
+          }
+        }
+
+        @media (prefers-color-scheme: light) {
+          .body {
+            --color-main: #9B5DE5;
+            --color-primary: #F15BB5;
+            --color-secondary: #00BBF9;
+            --color-background: #ffffff;
+            --color-text: #111111;
+          }
+        }
+
+        @media (prefers-reduced-motion) {
+          .body,
+          .split,
+          .half-left,
+          .half-right,
+          .glyph {
+            animation: none;
+          }
+
+          .split {
+            gap: 1.4em;
+          }
+
+          .half-left {
+            transform: translateX(-0.35em);
+          }
+
+          .half-right {
+            transform: translateX(0.35em);
+          }
+        }
+      </style>
+
+      <div class="body">
+        <div class="container">
+          <div class="split">
+            <div class="half half-left">
+              <div class="row ml">
+                <span class="glyph" style="--i:0">&#x0D05;</span>
+                <span class="glyph" style="--i:7">&#x0D1F;&#x0D3F;</span>
+              </div>
+              <div class="row en">
+                <span class="glyph" style="--i:6">a</span>
+                <span class="glyph" style="--i:3">di</span>
+              </div>
+            </div>
+            <div class="half half-right">
+              <div class="row ml">
+                <span class="glyph" style="--i:4">&#x0D2A;&#x0D4A;</span>
+                <span class="glyph" style="--i:5">&#x0D33;&#x0D3F;</span>
+              </div>
+              <div class="row en">
+                <span class="glyph" style="--i:1">po</span>
+                <span class="glyph" style="--i:2">li</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>
