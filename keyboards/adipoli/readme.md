@@ -1,4 +1,4 @@
-# adipoli
+# adipoli ✋🏾⌨️ ⌨️🤚🏾
 
 Custom **split ergonomic keyboard** with two independent halves. Each half uses a **Pro Micro** (ATmega32u4), **COL2ROW** diodes, and a **3×7** matrix (five alpha keys per row plus two thumb keys).
 
@@ -6,22 +6,25 @@ Firmware is maintained in [Roshanjossey/qmk_firmware](https://github.com/Roshanj
 
 ## Hardware
 
-| | |
-|---|---|
-| **Controller** | Pro Micro (8 MHz / 16 MHz ATmega32u4) |
-| **Matrix** | 3 rows × 7 columns per half |
-| **Diodes** | COL2ROW |
-| **Features** | Bootmagic, NKRO, mouse keys, extra keys |
-| **Maintainer** | [Roshanjossey](https://github.com/Roshanjossey) |
+|                |                                         |
+| -------------- | --------------------------------------- |
+| **Controller** | Pro Micro (8 MHz / 16 MHz ATmega32u4)   |
+| **Matrix**     | 3 rows × 7 columns per half             |
+| **Diodes**     | COL2ROW                                 |
+| **Features**   | Bootmagic, NKRO, mouse keys, extra keys |
 
 ### Matrix pins (both halves)
 
-| | Pins |
-|---|------|
+|             | Pins                                     |
+| ----------- | ---------------------------------------- |
 | **Columns** | `D0`, `D4`, `C6`, `D7`, `E6`, `B4`, `B5` |
-| **Rows** | `B1`, `B3`, `B2` |
+| **Rows**    | `B1`, `B3`, `B2`                         |
 
 USB IDs (default QMK test values): `VID=0xFEED`, `PID=0x0000`.
+
+### Wiring diagram
+
+![Adipoli matrix wiring — COL2ROW, both halves](wiring.svg)
 
 ## Layout
 
@@ -57,11 +60,11 @@ Each half is a 3×7 matrix (five alpha keys + two inner thumb keys per row). Tog
 
 Both halves use **3 layers** (`TO(n)` on the bottom-right thumb of layer 0 cycles left; right half uses `TO(1)` / `MO(2)` on layer 1).
 
-| Layer | Left | Right |
-|-------|------|-------|
+| Layer | Left                                             | Right                                                 |
+| ----- | ------------------------------------------------ | ----------------------------------------------------- |
 | **0** | QWERTY (Q–T), Esc/Bspc, Enter/→, Space → layer 1 | QWERTY (Y–P), arrows/Tab/Shift, Super/Ctrl, → layer 1 |
-| **1** | Numbers 1–5, same thumb cluster | 6–0 and symbol keys, `MO(2)` on last thumb |
-| **2** | F1–F5, bootloader on Enter thumb | F1–F5, bootloader on second thumb row |
+| **1** | Numbers 1–5, same thumb cluster                  | 6–0 and symbol keys, `MO(2)` on last thumb            |
+| **2** | F1–F5, bootloader on Enter thumb                 | F1–F5, bootloader on second thumb row                 |
 
 Layer definitions: `keymaps/left/keymap.c`, `keymaps/right/keymap.c`.
 
@@ -98,10 +101,10 @@ Then run `qmk flash` for that half.
 
 ## Keymaps
 
-| Keymap | Use |
-|--------|-----|
-| `left` | Left half (includes `keymap_german.h` for future DE layout work) |
-| `right` | Right half |
+| Keymap  | Use                                                              |
+| ------- | ---------------------------------------------------------------- |
+| `left`  | Left half (includes `keymap_german.h` for future DE layout work) |
+| `right` | Right half                                                       |
 
 ## New to QMK?
 

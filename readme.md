@@ -1,5 +1,12 @@
 # adipoli
 
+<img src="docs/assets/adi-poli.svg" width="800" height="400">
+
+<p>
+  <img src="docs/assets/keyboard-wiggle-square-keycaps.svg">
+  <img src="docs/assets/keyboard-wiggle-square-keycaps-right.svg">
+</p>
+
 Firmware for **adipoli**, a custom hard-wired split keyboard, built on [QMK](https://github.com/qmk/qmk_firmware).
 
 Each half has its own Pro Micro (ATmega32u4) and is flashed separately with the `left` or `right` keymap. There is no serial/USB split link in firmware—the halves work as two independent keyboards wired to your machine.
