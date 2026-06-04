@@ -1,0 +1,408 @@
+<svg fill="none" viewBox="0 0 800 600" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="800" height="600">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="height: 100%">
+      <style>
+        /* --- 1. CANVAS BOUNDARY PROTECTION --- */
+        .container {
+          width: 400px;
+          height: 400px;
+          background: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          overflow: hidden; 
+        }
+
+        /* --- 2. AGGRESSIVE OVERFLOW PROTECTION FOR 3D CONTEXTS --- */
+        .scene {
+          width: 400px;
+          height: 400px;
+          perspective: 900px; 
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: visible !important;
+        }
+
+        .keyboard-left, .unit, .prism {
+          transform-style: preserve-3d;
+          overflow: visible !important;
+        }
+
+        .unit {
+          position: relative;
+          width: 300px;
+          height: 300px;
+        }
+
+        .prism {
+          position: absolute;
+          inset: 0;
+          transform: rotateY(-40deg);
+          /* Smooth, oscillating side-to-side swing showing both key faces */
+          animation: 8s swingSides ease-in-out infinite;
+        }
+
+        /* --- 3. CORE GEOMETRY  WOOD TEXTURING --- */
+        .face-one,
+        .face-two,
+        .face-three,
+        .face-four,
+        .face-five {
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          box-sizing: border-box;
+          transform-origin: 150px 150px;
+          background: repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 0px,
+            rgba(0, 0, 0, 0.08) 2px,
+            rgba(255, 255, 255, 0.03) 4px,
+            transparent 11px
+          ),
+          linear-gradient(165deg, #c4925c 0%, #96642c 32%, #7a4f28 62%, #5c3a1a 100%);
+          overflow: visible !important;
+        }
+
+        .face-one, .face-two {
+          clip-path: polygon(100% 50%, 25% 93.301337%, 25% 6.698663%);
+        }
+
+        .face-three, .face-four, .face-five {
+          width: 259.807621135px;
+          left: 20.096189432px;
+          transform-origin: 129.903810567px 150px;
+        }
+
+        .face-one   { transform: rotateX(-270deg) translateZ(150px); }
+        .face-two   { transform: rotateX(270deg)  translateZ(150px); }
+        .face-three { transform: rotateY(30deg)  translateZ(75px); }
+        .face-four  { transform: rotateY(150deg) translateZ(75px); }
+        .face-five  { display: none; }
+
+        .face-three, .face-four {
+          transform-style: preserve-3d;
+        }
+
+        /* --- 4. PERFECTLY ALIGNED MECHANICAL SWITCHES --- */
+        .key {
+          position: absolute;
+          width: 0;
+          height: 0;
+          transform-style: preserve-3d;
+        }
+
+        .switch {
+          position: absolute;
+          width: 26px;
+          height: 26px;
+          margin: -13px 0 0 -13px;
+          transform-style: preserve-3d;
+          transform: translateZ(2px);
+          border-radius: 50%;
+          background: linear-gradient(145deg, #444 0%, #111 100%);
+          box-shadow: inset 0 0 0 2px #000;
+        }
+
+        .stem {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          left: 8px;
+          top: 8px;
+          transform-style: preserve-3d;
+          transform: translateZ(6px);
+          background: #ff4444; /* MX Red style stem marker for perfect visualization alignment */
+          box-shadow: 0 0 2px #000;
+        }
+
+        /* --- 5. SQUARE 3D MECHANICAL KEYCAPS --- */
+        .keycap {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          left: -15px;
+          top: -15px;
+          transform-style: preserve-3d;
+          transform: translateZ(12px) rotate(-90deg); /* Lifted safely above the switch basin */
+        }
+
+        .face-four .keycap {
+          transform: rotate(60deg);
+          
+        }
+
+        .keycap--wide {
+          width: 44px;
+          height: 44px;
+          left: -17px;
+          top: -17px;
+        }
+
+        .keycap-face-top,
+        .keycap-side-front,
+        .keycap-side-back,
+        .keycap-side-left,
+        .keycap-side-right {
+          position: absolute;
+          box-sizing: border-box;
+          backface-visibility: hidden;
+          transform-origin: center center;
+        }
+
+        .keycap-face-top {
+          width: 40px;
+          height: 40px;
+          left: 0;
+          top: 0;
+          border-radius: 4px;
+          background: radial-gradient(circle at 35% 28%, #fff 0%, #ececec 40%, #b8b8b8 100%);
+          transform: translateZ(6px);
+          box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #1a1a1a;
+        }
+
+        .keycap--wide .keycap-face-top {
+          width: 44px;
+          height: 44px;
+        }
+
+        /* Perpendicular keycap walls to maintain volumetric 3D square forms */
+        .keycap-side-front, .keycap-side-back, .keycap-side-left, .keycap-side-right { width: 40px; height: 12px; left: 0; top: 14px; }
+        .keycap-side-front { background: linear-gradient(180deg, #e1e1e1, #969696); transform: rotateX(-90deg) translateZ(20px); }
+        .keycap-side-back  { background: linear-gradient(180deg, #f0f0f0, #ababab); transform: rotateX(90deg)  translateZ(20px); }
+        .keycap-side-left  { background: linear-gradient(180deg, #d2d2d2, #888888); transform: rotateY(-90deg) translateZ(20px) rotateZ(90deg); }
+        .keycap-side-right { background: linear-gradient(180deg, #d2d2d2, #888888); transform: rotateY(90deg)  translateZ(20px) rotateZ(90deg); }
+
+        .keycap--wide .keycap-side-front, .keycap--wide .keycap-side-back, .keycap--wide .keycap-side-left, .keycap--wide .keycap-side-right { width: 44px; top: 16px; }
+        .keycap--wide .keycap-side-front { transform: rotateX(-90deg) translateZ(22px); }
+        .keycap--wide .keycap-side-back  { transform: rotateX(90deg)  translateZ(22px); }
+        .keycap--wide .keycap-side-left  { transform: rotateY(-90deg) translateZ(22px) rotateZ(90deg); }
+        .keycap--wide .keycap-side-right { transform: rotateY(90deg)  translateZ(22px) rotateZ(90deg); }
+
+        /* --- 6. HIGH-DETAIL SPONGEBOB ARTISAN INTERIOR --- */
+        .keycap--artisan .keycap-face-top {
+          background: #fbe334;
+          box-shadow: inset 0 2px 2px rgba(255,255,255,0.8), inset 0 -2px 4px rgba(170,110,0,0.4);
+          overflow: hidden;
+        }
+        .keycap--artisan .keycap-side-front { background: linear-gradient(180deg, #fbe334, #b0910b); }
+        .keycap--artisan .keycap-side-back  { background: linear-gradient(180deg, #fbe334, #b0910b); }
+        .keycap--artisan .keycap-side-left  { background: linear-gradient(180deg, #e4cc22, #967b04); }
+        .keycap--artisan .keycap-side-right { background: linear-gradient(180deg, #e4cc22, #967b04); }
+
+        .sb-canvas { position: absolute; inset: 0; }
+        .sb-pore { position: absolute; background: #dfc21a; border-radius: 50%; opacity: 0.5; }
+        .sb-pore-1 { width: 6px; height: 5px; top: 3px; left: 4px; }
+        .sb-pore-2 { width: 4px; height: 4px; top: 31px; left: 5px; }
+        .sb-pore-3 { width: 7px; height: 6px; top: 29px; left: 28px; }
+        
+        .sb-eye { position: absolute; width: 12px; height: 12px; background: #fff; border: 1.2px solid #1c1a12; border-radius: 50%; top: 5px; }
+        .sb-eye.l { left: 6px; } .sb-eye.r { left: 20px; }
+        .sb-iris { position: absolute; width: 6px; height: 6px; background: #21b2f0; border-radius: 50%; top: 2px; left: 2px; }
+        .sb-pupil { position: absolute; width: 3px; height: 3px; background: #000; border-radius: 50%; top: 1.5px; left: 1.5px; }
+        
+        .sb-nose { position: absolute; width: 4px; height: 8px; background: #fbe334; border: 1.2px solid #cca710; border-radius: 2px; top: 11px; left: 17px; z-index: 2; }
+        .sb-cheek { position: absolute; width: 4px; height: 3px; background: #ff6a00; border-radius: 50%; opacity: 0.6; top: 14px; }
+        .sb-cheek.l { left: 3px; } .sb-cheek.r { left: 31px; }
+        
+        .sb-mouth { position: absolute; width: 22px; height: 10px; border-bottom: 2px solid #b11f12; border-radius: 0 0 14px 14px; top: 16px; left: 8px; }
+        .sb-tooth { position: absolute; width: 4px; height: 4px; background: #fff; border: 1px solid #1c1a12; border-top: none; top: 25px; }
+        .sb-tooth.l { left: 14px; } .sb-tooth.r { left: 19px; }
+
+        /* Typography Text Legends */
+        .legend-shift { position: absolute; top: 15%; left: 18%; font-size: 7px; font-weight: 800; }
+        .legend-main { font-size: 12px; font-weight: 700; margin-top: 2px; }
+        .legend-wide { font-size: 9px; font-weight: 700; letter-spacing: 0.01em; }
+
+        /* --- 7. FLUID OSCILLATING SWING TIMING --- */
+        @keyframes swingSides {
+          0%, 100% { transform: rotateY(-65deg) rotateX(12deg); }
+          50%      { transform: rotateY(-155deg) rotateX(-12deg); }
+        }
+      </style>
+
+      <div class="container">
+        <div class="scene">
+          <div class="keyboard-left">
+            <div class="unit">
+              <div class="prism">
+                <div class="face-one"></div>
+                <div class="face-two"></div>
+                
+                <div class="face-three">
+                  <div class="key" style="left:90px;top:28px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">T</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:146px;top:28px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">G</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:201px;top:28px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">B</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:74px;top:80px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">R</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:128px;top:80px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">F</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:181px;top:80px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">V</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:53px;top:132px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">E</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:106px;top:132px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">D</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:159px;top:132px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">C</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:52px;top:184px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">W</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:105px;top:184px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">S</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:159px;top:184px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">X</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:94px;top:236px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap keycap--wide">
+                      <div class="keycap-face-top"><span class="legend-wide">Q</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:150px;top:236px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap keycap--wide">
+                      <div class="keycap-face-top"><span class="legend-wide">A</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:205px;top:232px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap keycap--wide">
+                      <div class="keycap-face-top"><span class="legend-wide">Z</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="face-four">
+                  <div class="key" style="left:100px;top:68px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap keycap--wide">
+                      <div class="keycap-face-top"><span class="legend-wide">Return</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:141px;top:38px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">Esc</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:124px;top:114px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">Space</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:163px;top:85px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">Tab</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:186px;top:130px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap">
+                      <div class="keycap-face-top"><span class="legend-main">⬆</span></div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                  <div class="key" style="left:147px;top:160px">
+                    <div class="switch"><div class="stem"></div></div>
+                    <div class="keycap keycap--artisan">
+                      <div class="keycap-face-top">
+                        <div class="sb-canvas">
+                          <div class="sb-pore sb-pore-1"></div><div class="sb-pore sb-pore-2"></div><div class="sb-pore sb-pore-3"></div>
+                          <div class="sb-eye l"><div class="sb-iris"><div class="sb-pupil"></div></div></div>
+                          <div class="sb-eye r"><div class="sb-iris"><div class="sb-pupil"></div></div></div>
+                          <div class="sb-nose"></div>
+                          <div class="sb-cheek l"></div><div class="sb-cheek r"></div>
+                          <div class="sb-mouth"></div>
+                          <div class="sb-tooth l"></div><div class="sb-tooth r"></div>
+                        </div>
+                      </div>
+                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                    </div>
+                  </div>
+                <div class="face-five"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </foreignObject>
+</svg>
