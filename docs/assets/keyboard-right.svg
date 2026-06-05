@@ -1,408 +1,420 @@
-<svg fill="none" viewBox="0 0 800 600" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <foreignObject width="800" height="600">
+<svg fill="none" viewBox="0 0 400 400" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="400" height="400">
     <div xmlns="http://www.w3.org/1999/xhtml" style="height: 100%">
-      <style>
-        /* --- 1. CANVAS BOUNDARY PROTECTION --- */
-        .container {
-          width: 400px;
-          height: 400px;
-          background: transparent;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          overflow: hidden; 
-        }
+  <style>
+    /* --- 1. CANVAS BOUNDARY PROTECTION --- */
+    .container {
+      width: 400px;
+      height: 400px;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden; 
+    }
 
-        /* --- 2. AGGRESSIVE OVERFLOW PROTECTION FOR 3D CONTEXTS --- */
-        .scene {
-          width: 400px;
-          height: 400px;
-          perspective: 900px; 
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: visible !important;
-        }
+    /* --- 2. AGGRESSIVE OVERFLOW PROTECTION FOR 3D CONTEXTS --- */
+    .scene {
+      width: 400px;
+      height: 400px;
+      perspective: 900px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible !important;
+    }
 
-        .keyboard-right, .unit, .prism {
-          transform-style: preserve-3d;
-          overflow: visible !important;
-        }
+    .keyboard-right, .unit, .prism {
+      transform-style: preserve-3d;
+      overflow: visible !important;
+    }
 
-        .unit {
-          position: relative;
-          width: 300px;
-          height: 300px;
-        }
+    .unit {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
 
-        .prism {
-          position: absolute;
-          inset: 0;
-          transform: rotateY(40deg); /* Mirrored horizontal anchor orientation */
-          /* Smooth, oscillating side-to-side swing showing both key faces */
-          animation: 8s swingSides ease-in-out infinite;
-        }
+    .prism {
+      position: absolute;
+      inset: 0;
+      transform: rotateY(40deg);
+      animation: 8s swingSides ease-in-out infinite;
+    }
 
-        /* --- 3. CORE GEOMETRY  WOOD TEXTURING --- */
-        .face-one,
-        .face-two,
-        .face-three,
-        .face-four,
-        .face-five {
-          position: absolute;
-          width: 300px;
-          height: 300px;
-          box-sizing: border-box;
-          transform-origin: 150px 150px;
-          background: repeating-linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.05) 0px,
-            rgba(0, 0, 0, 0.08) 2px,
-            rgba(255, 255, 255, 0.03) 4px,
-            transparent 11px
-          ),
-          linear-gradient(165deg, #c4925c 0%, #96642c 32%, #7a4f28 62%, #5c3a1a 100%);
-          overflow: visible !important;
-        }
+    /* --- 3. CORE GEOMETRY and WOOD TEXTURING --- */
+    .face-one,
+    .face-two,
+    .face-three,
+    .face-four,
+    .face-five {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      box-sizing: border-box;
+      transform-origin: 150px 150px;
+      background: url("data:image/svg+xml,%3Csvg%20xmlns%3Ardf%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%22600%22%20width%3D%22600%22%20version%3D%221.1%22%20xmlns%3Acc%3D%22http%3A%2F%2Fcreativecommons.org%2Fns%23%22%20xmlns%3Adc%3D%22http%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%22%3E%20%3Cg%20transform%3D%22translate(0%20-452.36)%22%3E%20%3Cg%20transform%3D%22matrix(1.1719%200%200%201.1901%20.0000012857%20443.32)%22%3E%20%3Cpath%20d%3D%22m0%20256v-256h256%20256v256%20256h-256-256v-256z%22%20fill%3D%22%2396642c%22%2F%3E%20%3Cpath%20fill%3D%22%238c5829%22%20d%3D%22m6.8143%20501.4c1.6784-123.55%2012.837-247.16%203.7917-370.67-1.6764-43.565-3.3106-86.946-3.7207-130.54%2011.824%2034.893%204.1237%2072.066%208.0547%20108.01.60468%2095.044%208.9642%20190.32-.78216%20285.16-2.341%2036.731-3.8412%2073.527-3.8271%20110.34-2.6654%208.9807-5.2046%201.9548-3.5165-2.2947zm35.125-25.15c-3.179-125.7-9.012-251.66.349-377.23.092-33.006-1.399-66.074%201.236-99.02.40029%20115.88%203.2765%20218.66-2.8224%20328.56%206.6409%2065.97.29866%20101.84%208.3481%20155.6%201.1935%2022.219-12.517%2019.49-7.0943-.57906l.05501-3.6684zm10.498%2032.5c-4.728-177.23-3.952-333.12-.185-496.2%2014.787-3.9378%201.0795%2033.058%205.2627%2044.161-12.609%20156.39%205.7067%20302.75%201.7644%20447.87-.93758%202.6058-3.7226%205.5428-6.842%204.1718zm12.043-6.7502c4.606-39.39%202.294-79.04-2.14-118.29-6.205-89.43-6.656-179.17-1.85-268.67%201.466-34.208-.025-69.561%205.559-102.96%205.268%2018.734-.984%2041.842-.843%2062.327-1.55%2024.817-2.751%2049.713-1.544%2074.573%205.35-47.15%201.795-94.968%209.52-141.9-1.506%2067.218-8.65%20134.23-8.433%20201.53-1.3387%2073.723%204.0988%20147.37%2012.6%20220.53%201.2796%2021.885.49109%2060.196-2.4882%2071.842-1.965-35.12%203.498-70.53-3.531-105.35-13.278-364.96-12.07-165.81.341%2062.74-.43019%2010.898%202.7794%2045.058-7.1908%2043.625zm-5.876-243.73c-3.0922%201.8163%203.2473%202.117%200%200zm33.89%20251.19c4.425-77.77%202.776-155.73%206.418-233.54-22.893-60.04-14.117-125.35-10.715-187.84%208.721-22.85-8.336-74.557%2012.203-79.139%204.531%2040.003-7.3484%2081.614%207.4198%20120.54%2011.974%2025.458%2013.775%2053.397%2012.792%2081.153-4.8741%2056.428%203.6921%20127.48%2011.28%20190.78%203.1459%2028.045%202.5397%2056.222%205.1625%2084.269%201.124%2013.766-11.902%2025.17-9.0542%204.0864-1.9295-29.52%202.8974-59.823-3.0796-88.867-20.623-2.2293-10.912%2036.585-16.33%2051.892-3.7655%2018.858-.7261%2044.373-12.081%2058.666l-2.2887-.70552-1.7243-1.2879zm12.916-6.96c6.58-17.962.54699-66.886%2016.939-66.208%203.2999%2018.631%204.5318%2053.828-.78751%2062.681-1.3409-11.773%208.7762-49.667-7.2466-43.942-2.1392%2014.22.63409%2032.618-8.9046%2047.469zm32.202%202.75c6.9793-76.491-4.4534-152.84-12.463-228.75-3.411-43.114-3.244-86.448-.95965-129.62-1.275-16.683-33.837-41.094-3.3051-41.474%209.5105-23.074-1.6144-48.772%201.1859-72.994%207.7925-38.624-8.461%2033.789%209.9914%2023.083.96897-11.832%206.4405-55.829%203.7019-22.398-11.982%20108.2-17.345%20218.41%202.5089%20326.03%203.6582%2039.01%203.6692%2078.232%206.142%20117.32-7.8233%207.4463%201.5081%2022.79-6.8021%2028.809zm5.6312%201.25c7.9157-25.138.16479-52.147%2010.028-76.391%203.094-13.963-8.7217-54.714-1.6937-54.075%206.2425%2042.613%204.2618%2086.333-4.5438%20128.25-.46325%201.9599-2.2665%201.792-3.7907%202.2123zm10.096%202.75c7.6755-26.102%204.4562-53.859%2011.365-79.603-4.8938-88.305-24.949-176.65-23.29-259.32%203.2151-29.474-8.6239-60.189%204.2509-88.622%202.9457-22.438-4.532-50.67%205.37-68.464%2015.181-25.055%203.8996%2023.093%203.2487%2032.228-8.4183%2070.816-1.8641%20117.84-3.3694%20213.6%2017.979%2065.9%2021.922%20133.4%2018.675%20196.44-2.5582%2012.532-4.7868%2057.899-16.251%2053.737zm38.261-6.5c5.8752-82.585%208.265-165.84-1.4217-248.24-2.9019%2021.359-18.936%2019.28-16.385-1.507-8.5391-44.68-17.351-91.262-4.4357-136.07%206.5386-29.721%2016.617-58.917%2018.188-89.525-4.202%208.26-14.673%2046.27-8.3137%2018.053-3.4416-11.568%2015.979-52.29%2014.283-21.81-2.1155%209.3007-9.4872%2045.923-1.9641%2039.745%202.6165-19.805-.73165-69.771%2032.023-55.181%203.1544%2035.664%204.5946%2071.495%2013.838%20106.2-.32125%2024.37%202.1102%2057.667-12.691%2076.003-8.2409-17.686%201.0899-45.603-13.005-58.379-18.686%2032.417-4.312%2049.207-7.1767%20106.3-14.467%2095.279%2024.029%20177.94%206.0477%20266.79-3.9249-19.871-1.7575%2010.484-6.4627-8.6764-3.1509-27.773%204.6472-55.988-4.6351-83.321-1.9273%2029.802%207.5691%2061.39-3.2442%2090.315-5.7016%207.7385-4.7815%206.9607-4.645-.70374zm2.0057%202.5208c-3.0923%201.8163%203.2473%202.117%200%200zm7.0304-183.36c.30338-40.418-4.5346-92.033-7.6981-138.11-6.3417%208.397-7.3593%2049.613-16.737%2020.717-13.08-32.332%201.7725-66.349%2011.635-97.324%204.8771-12.577-7.252-23.89-5.991-5.1611-8.0948%2033.416-16.818%2068.093-10.831%20102.62-6.0313%2021.587%2020.958%2033.752%2021.243%2011.959%206.5585%2021.466%202.7681%2045.281%206.0126%2067.675%201.3275%2025.592%201.9898%2051.242%201.0273%2076.86%201.5886-13.023.76792-26.166%201.3391-39.24zm-19.289-90.452c-2.8098-7.622%203.8112%204.1307%200%200zm33.474%20271.04c-7.456-11.866%2013.136-37.835%2010.308-11.258%201.7931%207.5676-5.302%2032.212-10.308%2011.258zm13.16%208.25c3.3281-36.091-7.904-71.1-14.102-106.09-6.0956-74.271-10.707-149.43.12793-223.51%206.6915%205.1061%205.0522%2049.114%2014.632%2029.026-1.2831-19.782%2022.345-22.186%2014.812.35181%205.5978%2087.307%203.014%20174.87%207.0056%20262.24-6.4502-87.502-2.2421-175.48-10.546-262.88-14.248-6.6918-9.4765%2044.191-22.06%2017.023-12.612%2038.854-6.7263%2080.396-6.6181%20120.46%203.4416%2053.39%2020.757%20105.77%2017.423%20159.51zm25.566-26.5c-4.2194-65.566-5.7766-202.21-5.0257-303.65%207.02-59.598%2010.791-119.88%205.7237-179.8%2012.267%208.1926%202.0596%2056.021%205.3445%2021.018-1.4762-17.208%203.8795-18.466%202.5421-.81751-1.1683%2061.606%202.0759%20123.33-3.9253%20184.78-2.0509%2026.634%203.3331%2052.874-1.1935%2079.44-1.2598%2073.539%205.137%20147.02%204.4523%20220.58-11.967%2012.023-5.9967-16.65-7.918-21.552zm6.0394-8c-1.7306-14.482.0119-33.635-3.3208-45.221%201.0073%2015.061-1.7861%2030.643%203.3208%2045.221zm13.299%2033c-4.4426-78.11-1.9445-158.25-.48398-254.51%205.3151-69.448%2011.485-139.38%202.459-208.81-2.8165-11.423%201.2812-58.307%203.8964-26.381%202.3967%2039.385%204.0627%2078.844%204.9146%20118.3.17638%2024.683-.19834%2049.364-.50872%2074.044%2012.41-26.934%203.5229-57.918%206.1377-86.494-2.9607-34.912-3.5827-69.951-7.4495-104.7%209.3203-28.143%2011.246%2017.257%2011.119%2027.088%209.21%20167.22-13.286%20310.48-4.2743%20461.46-22.072-95.888.31655-202.1-1.8334-292.62-13.288%2034.965-3.817%2066.052-11.49%20122.71-1.1376%2040.066-.3334%2080.212%203.1391%20120.15-11.518%2017.904%2013.867%2033.03-5.6257%2049.775zm41.186.5c-1.8814-42.287-12.358-83.945-9.8197-126.47-2.5729-122.29%209.1637-244.28%209.6891-366.53%209.7864-13.416%201.6916%2030.528%202.4289%2038.892-2.361%20105.02-12.197%20233.98-7.8488%20351.65-3.2662%2029.054%2014.115%2048.168%2010.692%2076.789-.77837%208.4086%207.3991%2022.393-5.1417%2025.675zm10.415-2.5c5.2934-44.249-4.9632-88.016-12.162-131.32-5.7934-58.265-1.1666-116.81.20906-175.17%206.1741%2032.721-.10049%2066.239%202.103%2099.317-.12483%2038.867%206.9953%2077.176%2013.135%20115.32%202.3788%2030.908%202.1949%2062.067-1.4712%2092.868l-1.1971.11927zm7.8837%203.2304c2.904-62.973%201.8064-126.6-11.188-188.44-5.0673-90.85-3.6527-182.2%207.7057-272.55-.71551-11.295-2.5077-49.041%2014.404-37.913-1.2484%2044.103-10.981%2087.366-15.517%20131.11-4.1094%20150.87-2.3505%20145.67%209.2654%20191.47%202.5039%2036.091%205.8708%2072.559%205.9104%20108.55-1.4848%2022.941%207.7697%2053.416-9.7028%2066.913l-.31133.83993-.56598.0324zm15.99-68.98c1.5819-122.52-16.229-245.44.0659-367.56.01-16.439-1.273-60.105%203.9933-59.1-4.6046%20111.34-10.617%20222.94-2.464%20334.26%201.8394%2053.9%203.2333%20107.83%202.5706%20161.77-11.068-21.861-.32865-46.404-4.1658-69.376zm37.268%2065.75c-.085-36.525%202.2162-73.034%206.2906-109.32%2029.176%2011.87%203.9328%2049.079%209.5134%2072.245-.45821%2010.809%204.9228%2045.08-15.804%2037.079zm22.712%200c2.2459-12.724%205.0989-55.084%205.0672-21.311-.15453%207.3299-1.2016%2014.93-5.0672%2021.311zm31.552-3c-1.8686-128.49%2020.836-257.1%204.0844-385.36-6.439-38.43-5.3879-77.314-3.8693-116.09%2010.914%2046.484%201.1245%2096.792%209.1032%20110.27%208.134%20103%202.6237%20206.36%201.1352%20309.49-5.4687%2027.125-2.3199%2063.442-9.7756%2085.429zm7.482-5c4.1164-33.418%2014.722-66.42%208.0438-100.28-1.8106-81.171.0183-162.36.34586-243.53%201.3954%20110.76%201.366%20221.84%202.384%20332.42.1606%207.1573-13.246%2033.002-10.774%2011.398zm8.2252-125.98c-3.0923%201.8163%203.2473%202.117%200%200zm16.608%20115.51c5.3442-7.9098-5.2672-25.516-3.9657-6.6366%204.0483-67.882%2011.287-136.44-.43743-203.97-3.112-59.168%202.573-118.39%201.412-177.65%202.2876-31.776-4.1165-66.116%204.9625-96.33%2024.308-17.71%2047.477%2013.077%2033.68%2035.054%205.356%20142.29%203.7322%20284.71%202.4849%20427.07%204.0139%2020.134-6.7598%2047.755-28.903%2044.544-8.5136-3.5327-11.953-13.841-9.2331-22.087zm24.14-258.78c2.9765-63.817.90931-127.79-4.3387-191.44-12.492%2024.572-2.4148%2054.173-7.0552%2080.695.33707%2039.524%204.0331%2078.963%209.7686%20118.05.98038-2.3605%201.4728-4.7623%201.6253-7.3094zm-4.2831-9.4167c-1.3023-5.882%202.2803%201.8534%200%200zm17.525-96.312c-3.0923%201.8163%203.2473%202.117%200%200zm0-4c-3.0923%201.8163%203.2473%202.117%200%200zm-189.53%20385.31c-1.3023-5.882%202.2803%201.8534%200%200zm-106.31-16.349c-5.1998-10.991%205.1196-.31473%200%200zm155.93-15.42c-13.027%202.8601%205.5943-20.978-9.077-12.262-2.2304-98.242-7.7917-196.49-6.4866-294.77%201.0834-25.638%204.3234-51.529%203.7146-76.958%2015.618-19.028%2010.098%2023.307%2013.74%2034.129%201.3681%2025.262%205.4087%2050.115%2011.002%2074.683%2014.127%2057.126%2019.2-58.224%2022.851-77.716%204.8688-19.869-1.337-48.594%2013.329-62.845%208.0537%2021.594%206.4441%2046.133%2011.204%2068.822%209.6672%2076.18%2012.966%20154.72-2.3125%20230.13-14.271-28.485-14.479-63.401-23.326-94.363%206.2231%2020.138-10.51-17.431-10.756%207.9493-5.6101%2040.494-10.868%2081.078-16.488%20121.6-3.5238%2027.064-4.4953%2054.742-6.3843%2081.686l-1.0094-.0885zm-5.0811-86.538c-3.0923%201.8163%203.2473%202.117%200%200zm12.965-136.88c-4.8777-32.036-7.7602-64.371-13.83-96.223-10.144%2032.581-4.5388%2067.52-4.4916%20101.09%201.4267%2028.952.37404%2058.122%204.916%2086.845%2020.886%2013.332%2014.012-83.322%2013.406-91.714zm50.495%2050.153c10.254-66.482%203.9743-134.29-8.1326-200.08-20.221%2027.952-8.8552%2063.891-14.174%2095.514%201.8651%2035.652%206.0387%2072.245%2022.306%20104.56zm-276.08%20172.52c-1.5635-7.663%203.6079%202.9801%200%200zm192.62-13.81c1.2852-13.411%201.8206%206.8683%200%200zm88.715-23.759c-2.505-14.372%204.3089-18.897%202.173-.72406.35584%2012.562-3.8667%2021.342-2.173.72406zm-20.449%2016.318c-4.7256-12.203%202.302-39.546%201.206-10.868.047%203.645-.0345%207.3709-1.206%2010.868zm-294.89-7.25c-1.2572-6.0804%203.19%202.8566%200%200zm161.19-5.06c-.11365-7.6687%201.4032%204.1773%200%200zm.0774-7.5c.75595-8.1264.75595%208.1264%200%200zm-145.19-1.4167c-1.3023-5.882%202.2803%201.8534%200%200zm145.15-6.58c.54961-6.8903.54961%206.8903%200%200zm-272.96-34.5c9.3987-119.26-1.1861-102.54%201.6233-3.73-.3118%208.81-2.0793%2021.54-1.6233%203.73zm225.32%207.8732c.16656-18.87-12.146-67.601.49774-69.034%205.3888%2022.42%2010.012%2044.973-.49774%2069.034zm-187.94-17.12c-2.7286-24.204%203.8813-10.842.79153%205.4281zm4.015-23.917c-6.8314-4.1098%202.2762-6.6657%200%200zm94.333-15.22c-7.9961-51.204-7.7616-103.31-9.0726-155.01-.85321-54.347-4.8172-66.827%209.5815-172.57%206.2312%2012.661-7.253%2051.423-5.6843%2073.579-2.4418%2054.473-1.3542%20109.1-.44951%20163.58%2013.904%2026.911-19.879%2073.65%205.625%2090.411zm-101-66.78c-27.333%20158.3-13.667%2079.149%200%200zm148.39-14.75c-7.0815-5.5382%202.7399-7.2581%200%200zm92.685-30.001c-1.3023-5.882%202.2803%201.8534%200%200zm1-15c-1.3023-5.882%202.2803%201.8534%200%200zm-47-5c-1.3023-5.882%202.2803%201.8534%200%200zm200.92-14.14c3.8083-3.6006-.75385%206.9169%200%200zm-123.38-32.44c1.0242-51.604%203.1997-103.32%2010.598-154.45%208.0933%2027.809-7.0032%2055.371-5.5553%2083.467-1.8771%2028.732-1.0874%2057.663-5.1215%2086.234-.3779-5.0811.11282-10.166.079-15.25zm197.45-8.4167c-1.3023-5.882%202.2803%201.8534%200%200zm-56.426-1.3354c-1.6491-38.762-9.5992-59.871-7.6601-142.93%2013.432%203.7668%202.7812%2039.721%206.6732%2055.558.92313%2029.101%204.3366%2058.306.98691%2087.376zm-2.0491-93.977c-3.0923%201.8163%203.2473%202.117%200%200zm58.68%2086.737c.75595-8.1264.75595%208.1264%200%200zm-296.8-9.1007c-3.2541-13.074%203.9031%204.9153%200%200zm29.53-1.81c-5.41-40.435-10.33-80.937-15.03-121.46%2011.342%2019.39%205.6354%2046.11%209.6796%2068.329-1.0296%2013.468%2013.386%2028.933%2013.794%206.0984%203.3325-19.533-3.662-59.538.103-66.735%201.5822%2037.562%204.3534%2075.935-5.255%20112.73%202.504-9.7228-1.1806.9922-3.2917%201.039zm96.667-.75811c.68618-21.219%203.7803-67.731%206.1727-72.615-.55773%2024.305-3.0488%2048.52-6.1727%2072.615zm-180.41-5.62c.63451-12.321%2010.085-40.219%205.2536-11.541-.63637%204.2001-2.0014%208.5792-5.2536%2011.541zm349.74-14.21c1.2808-8.5005%201.5294%209.7299%200%200zm-264.86-10.41c-2.9166-4.7183%205.5545%201.9185%200%200zm265.11-10.59c.28529-9.3558.9918%206.1152%200%200zm-400.25-6.451c-6.37-41.204%203.36-106.66%207.3-32.543-1.33%2010.862-1.66%2022.856-7.3%2032.543zm278.58-13.271c.87-18.835-14.6-66.11%208.73-64.037%206.03%2021.837-7.16%2042.595-8.73%2064.037zm33.494-.19446c-1.3023-5.882%202.2803%201.8534%200%200zm-193.43-5.084c2.0221-4.3555.78979%207.2532%200%200zm-111.56-13.917c-1.3023-5.882%202.2803%201.8534%200%200zm211-26c-1.3023-5.882%202.2803%201.8534%200%200z%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fg%3E%20%3C%2Fsvg%3E") center / cover;
+    }
 
-        /* FIXED: Mirrored clip-path to make the prism caps point left toward the center seam */
-        .face-one, .face-two {
-          clip-path: polygon(0% 50%, 75% 93.301337%, 75% 6.698663%);
-        }
+    /* FIXED: Mirrored prism caps to point toward center seam */
+    .face-one, .face-two {
+      clip-path: polygon(0% 50%, 75% 93.301337%, 75% 6.698663%);
+    }
 
-        .face-three, .face-four, .face-five {
-          width: 259.807621135px;
-          left: 20.096189432px;
-          transform-origin: 129.903810567px 150px;
-        }
+    .face-three, .face-four, .face-five {
+      width: 259.807621135px;
+      left: 20.096189432px;
+      transform-origin: 129.903810567px 150px;
+    }
 
-        /* FIXED: Inverted Y-axis rotations to flip the sloped panels symmetrically */
-        .face-one   { transform: rotateX(-270deg) translateZ(150px); }
-        .face-two   { transform: rotateX(270deg)  translateZ(150px); }
-        .face-three { transform: rotateY(-30deg)  translateZ(75px); }
-        .face-four  { transform: rotateY(-150deg) translateZ(75px); }
-        .face-five  { display: none; }
+    .face-one   { transform: rotateX(-270deg) translateZ(150px); }
+    .face-two   { transform: rotateX(270deg)  translateZ(150px); }
+    .face-three { transform: rotateY(-30deg)  translateZ(75px); }
+    .face-four  { transform: rotateY(-150deg) translateZ(75px); }
+    .face-five  { display: none; }
 
-        .face-three, .face-four {
-          transform-style: preserve-3d;
-        }
+    .face-three, .face-four {
+      transform-style: preserve-3d;
+    }
 
-        /* --- 4. PERFECTLY ALIGNED MECHANICAL SWITCHES --- */
-        .key {
-          position: absolute;
-          width: 0;
-          height: 0;
-          transform-style: preserve-3d;
-        }
+    /* --- 4. PERFECTLY ALIGNED MECHANICAL SWITCHES --- */
+    .key {
+      position: absolute;
+      width: 0;
+      height: 0;
+      transform-style: preserve-3d;
+    }
 
-        .switch {
-          position: absolute;
-          width: 26px;
-          height: 26px;
-          margin: -13px 0 0 -13px;
-          transform-style: preserve-3d;
-          transform: translateZ(2px);
-          border-radius: 50%;
-          background: linear-gradient(145deg, #444 0%, #111 100%);
-          box-shadow: inset 0 0 0 2px #000;
-        }
+    .switch {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      margin: -13px 0 0 -13px;
+      transform-style: preserve-3d;
+      transform: translateZ(2px);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #444 0%, #111 100%);
+      box-shadow: inset 0 0 0 2px #000;
+    }
 
-        .stem {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          left: 8px;
-          top: 8px;
-          transform-style: preserve-3d;
-          transform: translateZ(6px);
-          background: #ff4444; 
-          box-shadow: 0 0 2px #000;
-        }
+    .stem {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      left: 8px;
+      top: 8px;
+      transform-style: preserve-3d;
+      transform: translateZ(6px);
+      background: #ff4444; 
+      box-shadow: 0 0 2px #000;
+    }
 
-        /* --- 5. SQUARE 3D MECHANICAL KEYCAPS --- */
-        .keycap {
-          position: absolute;
-          width: 40px;
-          height: 40px;
-          left: -15px;
-          top: -15px;
-          transform-style: preserve-3d;
-          transform: translateZ(12px) rotate(90deg); /* Mirrored keycap internal stem orientation */
-        }
+    /* --- 5. SQUARE 3D MECHANICAL KEYCAPS --- */
+    .keycap {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      left: -15px;
+      top: -15px;
+      transform-style: preserve-3d;
+      transform: translateZ(12px) rotate(90deg); 
+    }
 
-        .face-four .keycap {
-          transform: rotate(-60deg); /* Mirrored face-four rotation angle */
-        }
+    .face-four .keycap {
+      transform: rotate(-60deg);
+    }
 
-        .keycap--wide {
-          width: 44px;
-          height: 44px;
-          left: -17px;
-          top: -17px;
-        }
+    .keycap--wide {
+      width: 44px;
+      height: 44px;
+      left: -17px;
+      top: -17px;
+    }
 
-        .keycap-face-top,
-        .keycap-side-front,
-        .keycap-side-back,
-        .keycap-side-left,
-        .keycap-side-right {
-          position: absolute;
-          box-sizing: border-box;
-          backface-visibility: hidden;
-          transform-origin: center center;
-        }
+    .keycap-face-top,
+    .keycap-side-front,
+    .keycap-side-back,
+    .keycap-side-left,
+    .keycap-side-right {
+      position: absolute;
+      box-sizing: border-box;
+      backface-visibility: hidden;
+      transform-origin: center center;
+    }
 
-        .keycap-face-top {
-          width: 40px;
-          height: 40px;
-          left: 0;
-          top: 0;
-          border-radius: 4px;
-          background: radial-gradient(circle at 35% 28%, #fff 0%, #ececec 40%, #b8b8b8 100%);
-          transform: translateZ(6px);
-          box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #1a1a1a;
-        }
+    .keycap-face-top {
+      width: 40px;
+      height: 40px;
+      left: 0;
+      top: 0;
+      border-radius: 4px;
+      background: radial-gradient(circle at 35% 28%, #fff 0%, #ececec 40%, #b8b8b8 100%);
+      transform: translateZ(6px);
+      box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a1a;
+    }
 
-        .keycap--wide .keycap-face-top {
-          width: 44px;
-          height: 44px;
-        }
+    .keycap--wide .keycap-face-top {
+      width: 44px;
+      height: 44px;
+    }
 
-        /* Perpendicular keycap walls to maintain volumetric 3D square forms */
-        .keycap-side-front, .keycap-side-back, .keycap-side-left, .keycap-side-right { width: 40px; height: 12px; left: 0; top: 14px; }
-        .keycap-side-front { background: linear-gradient(180deg, #e1e1e1, #969696); transform: rotateX(-90deg) translateZ(20px); }
-        .keycap-side-back  { background: linear-gradient(180deg, #f0f0f0, #ababab); transform: rotateX(90deg)  translateZ(20px); }
-        .keycap-side-left  { background: linear-gradient(180deg, #d2d2d2, #888888); transform: rotateY(-90deg) translateZ(20px) rotateZ(90deg); }
-        .keycap-side-right { background: linear-gradient(180deg, #d2d2d2, #888888); transform: rotateY(90deg)  translateZ(20px) rotateZ(90deg); }
+    .keycap-side-front, .keycap-side-back, .keycap-side-left, .keycap-side-right { width: 40px; height: 12px; left: 0; top: 14px; }
+    .keycap-side-front { background: linear-gradient(180deg, #e1e1e1, #969696); transform: rotateX(-90deg) translateZ(20px); }
+    .keycap-side-back  { background: linear-gradient(180deg, #f0f0f0, #ababab); transform: rotateX(90deg)  translateZ(20px); }
+    .keycap-side-left  { background: linear-gradient(180deg, #d2d2d2, #888888); transform: rotateY(-90deg) translateZ(20px) rotateZ(90deg); }
+    .keycap-side-right { background: linear-gradient(180deg, #d2d2d2, #888888); transform: rotateY(90deg)  translateZ(20px) rotateZ(90deg); }
 
-        .keycap--wide .keycap-side-front, .keycap--wide .keycap-side-back, .keycap--wide .keycap-side-left, .keycap--wide .keycap-side-right { width: 44px; top: 16px; }
-        .keycap--wide .keycap-side-front { transform: rotateX(-90deg) translateZ(22px); }
-        .keycap--wide .keycap-side-back  { transform: rotateX(90deg)  translateZ(22px); }
-        .keycap--wide .keycap-side-left  { transform: rotateY(-90deg) translateZ(22px) rotateZ(90deg); }
-        .keycap--wide .keycap-side-right { transform: rotateY(90deg)  translateZ(22px) rotateZ(90deg); }
+    .keycap--wide .keycap-side-front, .keycap--wide .keycap-side-back, .keycap--wide .keycap-side-left, .keycap--wide .keycap-side-right { width: 44px; top: 16px; }
+    .keycap--wide .keycap-side-front { transform: rotateX(-90deg) translateZ(22px); }
+    .keycap--wide .keycap-side-back  { transform: rotateX(90deg)  translateZ(22px); }
+    .keycap--wide .keycap-side-left  { transform: rotateY(-90deg) translateZ(22px) rotateZ(90deg); }
+    .keycap--wide .keycap-side-right { transform: rotateY(90deg)  translateZ(22px) rotateZ(90deg); }
 
-        /* --- 6. HIGH-DETAIL SPONGEBOB ARTISAN INTERIOR --- */
-        .keycap--artisan .keycap-face-top {
-          background: #fbe334;
-          box-shadow: inset 0 2px 2px rgba(255,255,255,0.8), inset 0 -2px 4px rgba(170,110,0,0.4);
-          overflow: hidden;
-        }
-        .keycap--artisan .keycap-side-front { background: linear-gradient(180deg, #fbe334, #b0910b); }
-        .keycap--artisan .keycap-side-back  { background: linear-gradient(180deg, #fbe334, #b0910b); }
-        .keycap--artisan .keycap-side-left  { background: linear-gradient(180deg, #e4cc22, #967b04); }
-        .keycap--artisan .keycap-side-right { background: linear-gradient(180deg, #e4cc22, #967b04); }
+    /* --- 6. CHERRY BLOSSOM ARTISAN STYLING --- */
+    .keycap--artisan .keycap-face-top {
+      background: linear-gradient(135deg, #fff0f5 0%, #ffb6c1 100%);
+      box-shadow: inset 0 2px 2px rgba(255,255,255,0.9), inset 0 -2px 4px rgba(219,112,147,0.4);
+    }
+    .keycap--artisan .keycap-side-front { background: linear-gradient(180deg, #ffb6c1, #db7093); }
+    .keycap--artisan .keycap-side-back  { background: linear-gradient(180deg, #ffb6c1, #db7093); }
+    .keycap--artisan .keycap-side-left  { background: linear-gradient(180deg, #f8a1b5, #c75678); }
+    .keycap--artisan .keycap-side-right { background: linear-gradient(180deg, #f8a1b5, #c75678); }
 
-        .sb-canvas { position: absolute; inset: 0; }
-        .sb-pore { position: absolute; background: #dfc21a; border-radius: 50%; opacity: 0.5; }
-        .sb-pore-1 { width: 6px; height: 5px; top: 3px; left: 4px; }
-        .sb-pore-2 { width: 4px; height: 4px; top: 31px; left: 5px; }
-        .sb-pore-3 { width: 7px; height: 6px; top: 29px; left: 28px; }
-        
-        .sb-eye { position: absolute; width: 12px; height: 12px; background: #fff; border: 1.2px solid #1c1a12; border-radius: 50%; top: 5px; }
-        .sb-eye.l { left: 6px; } .sb-eye.r { left: 20px; }
-        .sb-iris { position: absolute; width: 6px; height: 6px; background: #21b2f0; border-radius: 50%; top: 2px; left: 2px; }
-        .sb-pupil { position: absolute; width: 3px; height: 3px; background: #000; border-radius: 50%; top: 1.5px; left: 1.5px; }
-        
-        .sb-nose { position: absolute; width: 4px; height: 8px; background: #fbe334; border: 1.2px solid #cca710; border-radius: 2px; top: 11px; left: 17px; z-index: 2; }
-        .sb-cheek { position: absolute; width: 4px; height: 3px; background: #ff6a00; border-radius: 50%; opacity: 0.6; top: 14px; }
-        .sb-cheek.l { left: 3px; } .sb-cheek.r { left: 31px; }
-        
-        .sb-mouth { position: absolute; width: 22px; height: 10px; border-bottom: 2px solid #b11f12; border-radius: 0 0 14px 14px; top: 16px; left: 8px; }
-        .sb-tooth { position: absolute; width: 4px; height: 4px; background: #fff; border: 1px solid #1c1a12; border-top: none; top: 25px; }
-        .sb-tooth.l { left: 14px; } .sb-tooth.r { left: 19px; }
+    .sakura-canvas { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .sakura-flower { position: relative; width: 24px; height: 24px; }
+    .petal {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      background: linear-gradient(0deg, #db7093, #fff);
+      border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+      top: -2px;
+      left: 8px;
+      transform-origin: bottom center;
+    }
+    .p1 { transform: rotate(0deg); }
+    .p2 { transform: rotate(72deg); }
+    .p3 { transform: rotate(144deg); }
+    .p4 { transform: rotate(216deg); }
+    .p5 { transform: rotate(288deg); }
+    .sakura-center {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #ff1493;
+      border-radius: 50%;
+      top: 9px;
+      left: 9px;
+      box-shadow: 0 0 4px #ff69b4;
+    }
 
-        /* Typography Text Legends */
-        .legend-shift { position: absolute; top: 15%; left: 18%; font-size: 7px; font-weight: 800; }
-        .legend-main { font-size: 12px; font-weight: 700; margin-top: 2px; }
-        .legend-wide { font-size: 9px; font-weight: 700; letter-spacing: 0.01em; }
+    /* Typography Text Legends */
+    .legend-shift { position: absolute; top: 15%; left: 18%; font-size: 7px; font-weight: 800; }
+    .legend-main { font-size: 12px; font-weight: 700; margin-top: 2px; }
+    .legend-wide { font-size: 9px; font-weight: 700; letter-spacing: 0.01em; }
 
-        /* --- 7. FLUID OSCILLATING SWING TIMING --- */
-        @keyframes swingSides {
-          0%, 100% { transform: rotateY(65deg) rotateX(12deg); }   /* Mirrored from -65deg */
-          50%      { transform: rotateY(155deg) rotateX(-12deg); } /* Mirrored from -155deg */
-        }
-      </style>
+    /* --- 7. FLUID OSCILLATING SWING TIMING --- */
+    @keyframes swingSides {
+      0%, 100% { transform: rotateY(65deg) rotateX(12deg); }
+      50%      { transform: rotateY(155deg) rotateX(-12deg); }
+    }
+  </style>
 
-      <div class="container">
-        <div class="scene">
-          <div class="keyboard-right">
-            <div class="unit">
-              <div class="prism">
-                <div class="face-one"></div>
-                <div class="face-two"></div>
-                
-                <div class="face-three">
-                  <div class="key" style="left:169.81px;top:28px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">Y</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:113.81px;top:28px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">H</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:58.81px;top:28px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">N</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:185.81px;top:80px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">U</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:131.81px;top:80px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">J</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:78.81px;top:80px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">M</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:206.81px;top:132px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">I</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:153.81px;top:132px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">K</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:100.81px;top:132px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">,</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:207.81px;top:184px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">O</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:154.81px;top:184px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">L</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:100.81px;top:184px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">.</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:165.81px;top:236px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap keycap--wide">
-                      <div class="keycap-face-top"><span class="legend-wide">P</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:109.81px;top:236px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap keycap--wide">
-                      <div class="keycap-face-top"><span class="legend-wide">;</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:54.81px;top:232px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap keycap--wide">
-                      <div class="keycap-face-top"><span class="legend-wide">/</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
+  <div class="container">
+    <div class="scene">
+      <div class="keyboard-right">
+        <div class="unit">
+          <div class="prism">
+            <div class="face-one"></div>
+            <div class="face-two"></div>
+            
+            <!-- ==================== FIXED MIRRORED FACE THREE MATRIX ==================== -->
+            <div class="face-three">
+              <!-- Row 1: Y, H, N -->
+              <div class="key" style="left:169.81px;top:28px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">Y</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
                 </div>
+              </div>
+              <div class="key" style="left:113.81px;top:28px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">H</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:58.81px;top:28px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">N</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
 
-                <div class="face-four">
-                  <div class="key" style="left:159.81px;top:68px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap keycap--wide">
-                      <div class="keycap-face-top"><span class="legend-wide">Return</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:118.81px;top:38px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">Esc</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:135.81px;top:114px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">Space</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:96.81px;top:85px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">Tab</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:73.81px;top:130px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap">
-                      <div class="keycap-face-top"><span class="legend-main">⬆</span></div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
-                    </div>
-                  </div>
-                  <div class="key" style="left:112.81px;top:160px">
-                    <div class="switch"><div class="stem"></div></div>
-                    <div class="keycap keycap--artisan">
-                      <div class="keycap-face-top"> </div>
-                      <div class="keycap-side-front"></div><div class="keycap-side-back"></div>
-                        <div class="sb-canvas">
-                          <div class="sb-pore sb-pore-1"></div><div class="sb-pore sb-pore-2"></div><div class="sb-pore sb-pore-3"></div>
-                          <div class="sb-eye l"><div class="sb-iris"><div class="sb-pupil"></div></div></div>
-                          <div class="sb-eye r"><div class="sb-iris"><div class="sb-pupil"></div></div></div>
-                          <div class="sb-nose"></div>
-                          <div class="sb-cheek l"></div><div class="sb-cheek r"></div>
-                          <div class="sb-mouth"></div>
-                          <div class="sb-tooth l"></div><div class="sb-tooth r"></div>
-                        </div>
+              <!-- Row 2: U, J, M -->
+              <div class="key" style="left:185.81px;top:80px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">U</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:131.81px;top:80px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">J</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:78.81px;top:80px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">M</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+
+              <!-- Row 3: I, K, , -->
+              <div class="key" style="left:206.81px;top:132px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">I</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:153.81px;top:132px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">K</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:100.81px;top:132px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">,</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+
+              <!-- Row 4: O, L, . -->
+              <div class="key" style="left:207.81px;top:184px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">O</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:154.81px;top:184px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">L</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:100.81px;top:184px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">.</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+
+              <!-- Row 5: P, ;, / -->
+              <div class="key" style="left:165.81px;top:236px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap keycap--wide">
+                  <div class="keycap-face-top"><span class="legend-wide">P</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:109.81px;top:236px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap keycap--wide">
+                  <div class="keycap-face-top"><span class="legend-wide">;</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:54.81px;top:232px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap keycap--wide">
+                  <div class="keycap-face-top"><span class="legend-wide">/</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==================== THUMB CLUSTER & FUNCTION FACE ==================== -->
+            <div class="face-four">
+              <div class="key" style="left:159.81px;top:68px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap keycap--wide">
+                  <div class="keycap-face-top"><span class="legend-wide">Shift</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:118.81px;top:38px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">Ctrl</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:135.81px;top:114px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">Alt</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:96.81px;top:85px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">Super</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              <div class="key" style="left:73.81px;top:130px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap">
+                  <div class="keycap-face-top"><span class="legend-main">↓</span></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
+              </div>
+              
+              <!-- Cherry Blossom Inspired Artisan Keycap -->
+              <div class="key" style="left:112.81px;top:160px">
+                <div class="switch"><div class="stem"></div></div>
+                <div class="keycap keycap--artisan">
+                  <div class="keycap-face-top">
+                    <div class="sakura-canvas">
+                      <div class="sakura-flower">
+                        <div class="petal p1"></div>
+                        <div class="petal p2"></div>
+                        <div class="petal p3"></div>
+                        <div class="petal p4"></div>
+                        <div class="petal p5"></div>
+                        <div class="sakura-center"></div>
                       </div>
                     </div>
                   </div>
-                <div class="face-five"></div>
+                  <div class="keycap-side-front"></div><div class="keycap-side-back"></div><div class="keycap-side-left"></div><div class="keycap-side-right"></div>
+                </div>
               </div>
             </div>
+            <div class="face-five"></div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
   </foreignObject>
 </svg>
