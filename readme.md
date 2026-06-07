@@ -52,3 +52,9 @@ This branch is a trimmed QMK fork: only the **adipoli** keyboard is kept under `
 ## License
 
 QMK firmware is [GPL-2.0-or-later](LICENSE). See upstream QMK for full license and contributor terms.
+
+
+## Build pictures
+
+
+![Adipoli Showcase](docs/assets/gallery.svg)
