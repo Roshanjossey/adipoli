@@ -56,5 +56,31 @@ QMK firmware is [GPL-2.0-or-later](LICENSE). See upstream QMK for full license a
 
 ## Build pictures
 
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan="2" rowspan="2" width="50%" valign="top">
+      <img src="./docs/assets/adipoli-0.jpeg" width="100%" alt="Hero Shot">
+    </td>
+    <td colspan="2" rowspan="1" width="50%" valign="top">
+      <img src="./docs/assets/adipoli-1.jpeg" width="100%" alt="Wide View Top">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="1" rowspan="2" width="25%" valign="top">
+      <img src="./docs/assets/adipoli-2.jpeg" width="100%" alt="Tall Portrait Profile">
+    </td>
+    <td colspan="1" rowspan="1" width="25%" valign="top">
+      <img src="./docs/assets/adipoli-3.jpeg" width="100%" alt="Small Square Top">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" rowspan="1" width="50%" valign="top">
+      <img src="./docs/assets/adipoli-4.jpeg" width="100%" alt="Wide View Bottom">
+    </td>
+    <td colspan="1" rowspan="1" width="25%" valign="top">
+      <img src="./docs/assets/adipoli-5.jpeg" width="100%" alt="Small Square Bottom">
+    </td>
+  </tr>
+</table>
 
 ![Adipoli Showcase](docs/assets/gallery.svg)
